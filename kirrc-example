@@ -1,0 +1,19 @@
+rule: distribution, linux, version, distro, ubuntu
+lsb_release -cs
+cat /proc/version
+cat /etc/issue
+
+# this rule is for the task of setting up new nodes
+rule: server, ip, address, hosts, hostnames
+production: prod4
+integration: integration2
+dns server: 3.3.3.3
+
+and remember to restart all nodes after changing the parameters
+
+rule: dependencies, linux, package, info, ubuntu, version
+sudo apt-cache showpkg package-name
+
+# better than using wget
+rule: download, resume, scp, partial, get, wget
+rsync -vrPt -e ssh host:/remote_path/* /local_path/
